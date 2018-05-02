@@ -5,29 +5,6 @@ $(document).ready(function() {
     var correct = 0;
     var wrong = 0;
 
-    function answerWrong() {
-        wrong++;
-        alert("Incorrect!");
-        console.log("wrong");
-        return;
-    }
-
-    // Call function or right answer
-    function answerCorrect() {
-        correct++;
-        alert("Correct!");
-        console.log("correct");
-    }
-
-    // Show the final score
-    function showScore() {
-        $('.question').empty();
-        $('.question').append("<h2><p>" + correct + " correct</p></h2>");
-        $('.question').append("<h2><p>" + wrong + " incorrect</p></h2>");
-        countdownTimer.stop();
-        $('.timer').empty();
-    }
-
     var countdownTimer = {
         time: 30,
         reset: function() {
@@ -51,7 +28,7 @@ $(document).ready(function() {
             if (countdownTimer.time >= 0) {
                 $('.timer').html('<h3>' + countdownTimer.time + ' seconds remaining</h3>');
             }
-
+                
             else {
                 index++;
                 //answerCorrect();
@@ -67,16 +44,24 @@ $(document).ready(function() {
             }
         }
     }
+
+    // Call function for wrong answer
+    function answerWrong() {
+        wrong++;
+        alert("Wrong");
+        console.log("wrong");
+    }
+
+    // Call function for right answer
+    function answerCorrect() {
+        correct++;
+        alert("This is correct");
+        console.log("correct");
+    }
                  
 $(document).ready(function() {
 
-    // var Question = function(config) {
-    //     this.question = config.question;
-    //     this.answers = config.answers;
-    //     this.answer = config.answer;
-    // }
-        
-    var quest = [
+    let quest = [
         {
         question: 'Who commanded the invasion of Britain in the year 55 BC ?',
         answers: ['Napoleon', 'Alexander the Great', 'Julius Ceasar', 'Hannibal'],
@@ -87,17 +72,17 @@ $(document).ready(function() {
         answers: ['Cotton Gin', 'Printing Press', 'Guns', 'Compass'],
         answer: 'Printing Press'
         },
-        quest3 = {
+        {
         question: 'What country became a world-class power after defeating the Spanish Armada in AD 1588 ?',
         answers: ['England', 'Denmark', 'Portugal', 'France'],
         answer: 'England'
         },
-        quest4 = {
+        {
         question: 'Genghis Khan begins his conquest of what continent in AD 1206 ?',
         answers: ['Africa', 'Europe', 'Asia', 'Australia'],
         answer: 'Asia'
         },
-        quest5 = {
+        {
         question: 'What empire fell in the year AD 476 ?',
         answers: ['First Persian Empire', 'Caliphate', 'Mongol Empire', 'Roman Empire'],
         answer: 'Roman Empire'
@@ -105,38 +90,7 @@ $(document).ready(function() {
     ];
     
 
-    // var oneQuestion = new Question(quest1);
-    // var twoQuestion = new Question(quest2);
-    // var threeQuestion = new Question(quest3);
-    // var fourQuestion = new Question(quest4);
-    // var fiveQuestion = new Question(quest5);
-
-    // var questionArray = [quest1, quest2, quest3, quest4, quest5];
-        
-    // function loadQuestion(questionSelection) {
-
-    //     countdownTimer.reset();
-
-    //     for(var i = 0; i < questionArray.length; i++) {
-
-    //         $(".question").append("<h3>" + questionArray[questionSelection].question + "</h3>");
-    //         $("#buttonA").append(questionArray[i].answers[0]).show();
-    //         $("#buttonB").append(questionArray[i].answers[1]).show();
-    //         $("#buttonC").append(questionArray[i].answers[2]).show();
-    //         $("#buttonD").append(questionArray[i].answers[3]).show();
-
-    //     }
-    // does this work?
-        // getAnswer();  
-        // nextQuestion(index);
-    // }
-
-    // function nextQuestion() {
-    //     index = index++;
-    //     console.log(index);
-    // }
-
-    function setup() {
+    function takeQuiz() {
         // index = 0;
         $('.timer').append('<button id="startButton">Start</button>');
         $('#startButton').on('click', function() {
@@ -145,19 +99,51 @@ $(document).ready(function() {
 
             countdownTimer.start();
 
-            for(var i = 0; i < quest.length; i++) {
+            var selected = "";
+
+            for (var i = 0; i < quest.length; i++) {
                 
                 $(".question").append("<h3>" + quest[i].question + "</h3>");
                 console.log(quest[i].question);
 
-                for(c = 0; c < 4; c++) {
-                    $(".question").append("<input type='radio' name='answers' value='quest1.answers[i]'/>" + quest[i].answers[c]);
+                for (c = 0; c < 4; c++) {
+                    // $(".question").append("<input type='radio' name='" + c + "' value='" + quest[i].answers[c] + "'/>" + quest[i].answers[c]);
+
+                    $(".question").append("<input type='radio' id=radio_'" + c + "' name='" + c + "' value='" + quest[i].answers[c] + "'/>" + quest[i].answers[c]);
+
                     console.log('(' + i + ') ' + quest[i].answers[c]);
                 }
                 $(".question").append("<h3>" + quest[i].answer + "</h3>");
                 console.log(quest[i].answer);
 
+                console.log('Selected = ' + $(this.val));
+
             }
+
+            $(document).ready(function () {    
+
+                $('#radio_1').prop('checked', true);
+                $('#radio_2').prop('checked', true);
+                $('#radio_3').prop('checked', true);
+                $('#radio_4').prop('checked', true);
+
+            });
+
+            $(document).ready(function () {    
+
+                $("#radio_1, #radio_2", "#radio_3").change(function () {
+                    if ($("#radio_1").is(":checked")) {
+                        $(".answers").append('#radio_1').show();
+                    }
+                    else if ($("#radio_2").is(":checked")) {
+                        $(".answers").append('#radio_2').show();
+                    }
+                    else 
+                    $(".answers").append('#radio_3').show();
+                });        
+            });
+
+
             $('.done').append('<button id="doneButton">Done</button>');
             $('#doneButton').on('click', function() {
 
@@ -168,75 +154,41 @@ $(document).ready(function() {
         });
     }		
 
-    function getAnswer() {
-
-        nextQuestion();
-        $('.answerchoice').on('click', function() {
-
-            console.log('alert', index);
-
-            index++;
-            console.log('click', index);
-            $(".question").text('');
-            $("#buttonA").text('');
-            $("#buttonB").text('');
-            $("#buttonC").text('');
-            $("#buttonD").text('');
-            // loadQuestion(index);
-        })
-    }
-
         // Validate if answer is correct
-        setup();
+        takeQuiz();
         $('.answerchoice').on('click', function() {
         
-            // event.preventDefault();
-            console.log($('THIS = ' + this));
+            event.preventDefault();
 
-            if(this.id == 'buttonA') {
-                var answerChosen = 'A';
-            } else if(this.id == 'buttonB') {
-                answerChosen = 'B';
-            } else if (this.id == 'buttonC') {
-                answerChosen = 'C';
-            } else if (this.id == 'buttonD') {
-                answerChosen = 'D';
-            } 
-            
-            if ((answerChosen == 'A') && (questionArray[index].flags[0] == true)) {
-                answerCorrect();
-            } else if (answerChosen == 'A') {
-                answerWrong();
-            }
-            if ((answerChosen == 'B') && (questionArray[index].flags[1] == true)) {
-                answerCorrect();
-            } else if (answerChosen == 'B') {
-                answerWrong();
-            }
-            if ((answerChosen == 'C') && (questionArray[index].flags[2] == true)) {
-                answerCorrect();
-            } else if (answerChosen == 'C') {
-                answerWrong();
-            }
-            if ((answerChosen == 'D') && (questionArray[index].flags[3] == true)) {
-                answerCorrect();
-            } else if (answerChosen == 'D') {
-                answerWrong();
+            for (var i = 0; i < quest.length; i++) {
+
+                var answerChecked = $('input[quest[i].this]:checked').val();
+                console.log(answerChecked);
+
+                $(".answers").append(answerChecked);
+                
+                console.log('quest.answer = ' + quest.answer);
+                console.log($('THIS = ' + this));
+    
+                if(this.id == quest.answer) {
+                    correct++;
+                    console.log('correct = ' + correct);
+
+                } else {
+                    wrong++;
+                    console.log('wrong = ' + wrong);
+                }
             }
 
-            $(".question").text('');
-            $("#buttonA").text('');
-            $("#buttonB").text('');
-            $("#buttonC").text('');
-            $("#buttonD").text('');
-            index++;
-
-            if (index < questionArray.length) {
-                // loadQuestion(index);
-
-            } else {
-                $(".answerchoice").hide();
-                showScore();
+            showScore();
+        
+            // Show the final score
+            function showScore() {
+                $('.question').empty();
+                $('.question').append("<h2><p>" + correct + " correct</p></h2>");
+                $('.question').append("<h2><p>" + wrong + " incorrect</p></h2>");
+                countdownTimer.stop();
+                $('.timer').empty();
             }
         });
     });
