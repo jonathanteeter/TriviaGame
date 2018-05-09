@@ -2,13 +2,13 @@ body {
     background-image: url("../images/trivia-background.jpeg");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 110%;
+    background-size: cover;
     text-align: center;
     font-family: "Times New Roman";
 }
 
 img {
-	height: 200px;
+	height: 220px;
     width: auto;
     image-orientation: middle;
 }
@@ -29,7 +29,7 @@ img {
 
 h1 {
     text-align: center;
-    font-size: 46px;
+    font-size: 52px;
     color: blueviolet;
     /* color: rgb(0, 109, 128); */
 }
