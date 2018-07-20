@@ -14,7 +14,8 @@ This was an exercise in program flow and control using these web technologies:  
 ## Challenges
 The most difficult challenge was setting up the radio button quiz and validating which radio button was selected for each question.
 
-## Link to [My Portfolio](https://teeterjm58.github.io/Basic-Portfolio/portfolio.html)
+## Link to [My Portfolio] 
+(https://teeterjm58.github.io/jtPortfolio/)
 
 
 
