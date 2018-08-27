@@ -6,7 +6,7 @@ $(document).ready(function() {
     var wrong = 0;
 
     var countdownTimer = {
-        time: 30,
+        time: 60,
         reset: function() {
             // Set timer back to 30 when reset function is called
             this.time = 30;
@@ -58,12 +58,12 @@ $(document).ready(function() {
             answer: 'Julius Ceasar'
         },
         {
-            question: 'What was Johann Gutenberg\'s revolutionary invention in AD 1439 ?',
+            question: 'What was Johann Gutenberg\'s revolutionary invention in 1439 ?',
             answers: ['Cotton Gin', 'Printing Press', 'Guns', 'Compass'],
             answer: 'Printing Press'
         },
         {
-            question: 'What country became a world-class power after defeating the Spanish Armada in AD 1588 ?',
+            question: 'What country became a world-class power after defeating the Spanish Armada in 1588 ?',
             answers: ['England', 'Denmark', 'Portugal', 'France'],
             answer: 'England'
         },
@@ -73,24 +73,34 @@ $(document).ready(function() {
             answer: 'Asia'
         },
         {
-            question: 'What empire fell in the year AD 476 ?',
+            question: 'What empire fell in the year 476 ?',
             answers: ['First Persian Empire', 'Caliphate', 'Mongol Empire', 'Roman Empire'],
             answer: 'Roman Empire'
         },
         {
-            question: 'The Battle of Hastings occured in AD 1066 and is part of what aggression ?',
-            answers: ['The Norman conquest of England', 'Muslim invasion of Spain', 'Mongols overrun eastern Europe', 'Jerusalem falls to First Crusade'],
-            answer: 'The Norman conquest of England'
+            question: 'The Battle of Hastings occured in 1066 and is part of what aggression ?',
+            answers: ['Norman conquest of England', 'Muslim invasion of Spain', 'Mongols overrun eastern Europe', 'Jerusalem falls to First Crusade'],
+            answer: 'Norman conquest of England'
         },
         {
-            question: 'What event led to the Protestant Reformation in AD 1517 ?',
+            question: 'What single event led to the Protestant Reformation in 1517 ?',
             answers: ['Napolean crowned Emperor of France', 'Dutch declares independance from Spain', 'Martin Luthers 95 theses', 'Ottoman Turks conquer Hungary'],
             answer: 'Martin Luthers 95 theses'
         },
         {
-            question: 'The first permanent European settlement is built in the Americas in AD 1496 where ?',
+            question: 'The first permanent European settlement is built in the Americas in 1496 where ?',
             answers: ['Veracruz', 'Saint Augustine', 'Jamestown', 'Santo Domingo'],
             answer: 'Santo Domingo'
+        },
+        {
+            question: 'What single event led to the American Revolution in 1773 ?',
+            answers: ['Boston Tea Party', 'Dred Scott Decision', 'Declaration of Independence signing', 'Battle of Bunker Hill'],
+            answer: 'Boston Tea Party'
+        },
+        {
+            question: 'Who said, "Ask not what your country can do for you, ask what you can do for your country ?',
+            answers: ['Barack Obama', 'John F. Kennedy', 'Ronald Reagan', 'Fidel Castro'],
+            answer: 'John F. Kennedy'
         }
     ];
     
@@ -118,6 +128,7 @@ $(document).ready(function() {
 
                     $(".question").append("<input type='radio' id=radio_'" + c + "' name ='" + "type-" + i + 
                     "' value='" + quest[i].answers[c] + "'/>" + quest[i].answers[c]);
+                    $(".question").append("<span>&nbsp;&nbsp;</span>");
 
                     console.log('(' + i + ') ' + quest[i].answers[c]);
                 }
@@ -136,10 +147,12 @@ $(document).ready(function() {
                 var wrongPcnt = Math.round((wrong / total) * 100);
 
                 $('.question').empty();
+                $('.question').append("<h3><p>" + "Time remaining is " + countdownTimer.time + " seconds !");
                 $('.question').append("<h2><p>" + correct + " Correct ( " + correctPcnt + "% )</p></h2>");
                 $('.question').append("<h2><p>" + wrong + " Incorrect ( " + wrongPcnt + "% )</p></h2>");
                 $('.question').append("<h2><p>" + answered + " Answered of " + total + " Questions</p></h2>");
                 countdownTimer.stop();
+                $('.question').append("<h3><p>" + "Refresh your browser to try again !");
                 $('.timer').empty();
             }
             
@@ -239,6 +252,30 @@ $(document).ready(function() {
                     console.log($(this).val());
                     
                     if ($(this).val() === quest[7].answer) {
+                        answerCorrect();
+                    } else {
+                        console.log($(this).val());
+                        answerWrong();
+                    }
+                });
+                
+                $.each($("input[name='type-8']:checked"), function() {
+
+                    console.log($(this).val());
+                    
+                    if ($(this).val() === quest[8].answer) {
+                        answerCorrect();
+                    } else {
+                        console.log($(this).val());
+                        answerWrong();
+                    }
+                });
+                
+                $.each($("input[name='type-9']:checked"), function() {
+
+                    console.log($(this).val());
+                    
+                    if ($(this).val() === quest[9].answer) {
                         answerCorrect();
                     } else {
                         console.log($(this).val());

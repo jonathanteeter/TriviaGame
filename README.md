@@ -2,8 +2,11 @@
 This game is the World History Trivia Game.  The player tests their knowledge of world history by answering multiple choice questions within a set time period.
 
 ## Design & Technology
-* This is an interactive game for web browsers with countdown timer.  
-* The application dynamically updates the HTML using JavaScript for the logic and jQuery to manipulate the HTML.
+* This is an interactive game for web browsers with countdown timer.
+    * The user is provided with a multiple-choice quiz.
+    * The goal is to answer all the questions correctly within the given amount of time.
+    * The user can refresh the browser to take the quiz as many times as they would like.
+    * The application dynamically updates the HTML using JavaScript for the logic and jQuery to manipulate the HTML.
 * Key technologies used to build this application are:
     * Bootstrap framework
     * HTML
